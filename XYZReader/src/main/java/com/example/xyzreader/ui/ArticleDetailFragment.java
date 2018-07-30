@@ -4,13 +4,9 @@ import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
-import android.content.res.ColorStateList;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -110,7 +106,7 @@ public class ArticleDetailFragment extends Fragment implements
                              Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_article_detail, container, false);
 
-        mPhotoView = (ImageView) mRootView.findViewById(R.id.photo);
+        mPhotoView = mRootView.findViewById(R.id.photo);
 
         mRootView.findViewById(R.id.share_fab).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,14 +138,14 @@ public class ArticleDetailFragment extends Fragment implements
             return;
         }
 
-        TextView titleView = (TextView) mRootView.findViewById(R.id.article_title);
-        TextView bylineView = (TextView) mRootView.findViewById(R.id.article_byline);
+        TextView titleView =  mRootView.findViewById(R.id.article_title);
+        TextView bylineView = mRootView.findViewById(R.id.article_byline);
         bylineView.setMovementMethod(new LinkMovementMethod());
-        TextView bodyView = (TextView) mRootView.findViewById(R.id.article_body);
+        TextView bodyView = mRootView.findViewById(R.id.article_body);
 
-        toolbar = (Toolbar) mRootView.findViewById(R.id.frag_detail_toolb);
+        toolbar =  mRootView.findViewById(R.id.frag_detail_toolb);
 
-        collapsingToolbarLayout = (CollapsingToolbarLayout) mRootView.findViewById(R.id.collapsingToolbar);
+        collapsingToolbarLayout =  mRootView.findViewById(R.id.collapsingToolbar);
 
 
         bodyView.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "Rosario-Regular.ttf"));
@@ -160,7 +156,7 @@ public class ArticleDetailFragment extends Fragment implements
 
 
             collapsingToolbarLayout.setTitle(" ");
-            AppBarLayout appBarLayout = (AppBarLayout) mRootView.findViewById(R.id.appBar);
+            AppBarLayout appBarLayout = mRootView.findViewById(R.id.appBar);
             appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
                 boolean isShow = false;
                 int scrollRange = -1;
@@ -174,7 +170,7 @@ public class ArticleDetailFragment extends Fragment implements
                         collapsingToolbarLayout.setTitle(mCursor.getString(ArticleLoader.Query.TITLE));
                         isShow = true;
                     } else if (isShow) {
-                        collapsingToolbarLayout.setTitle(" ");//carefull there should a space between double quote otherwise it wont work
+                        collapsingToolbarLayout.setTitle(" ");
                         isShow = false;
                     }
                 }
